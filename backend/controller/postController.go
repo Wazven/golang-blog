@@ -8,6 +8,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/wazven/backendblog/database"
 	"github.com/wazven/backendblog/models"
+	"github.com/wazven/backendblog/util"
 )
 
 func CreatePost(c *fiber.Ctx) error {
@@ -67,4 +68,13 @@ func UpdatPost(c *fiber.Ctx) error {
 	return c.JSON(fiber.Map{
 		"message":"Edit Posting Berhasil",
 	})
+}
+
+func UniquePost(c *fiber.Ctx) error {
+	cookie:=c.Cookies("jwt")
+	id, _ :=util.ParseJwt(cookie)
+	var blog []models.Blog
+	database.DB.Model(&blog).Where("user_id=?", id).Preload("User").Find(&blog)
+
+	return c.JSON(blog)
 }

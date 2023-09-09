@@ -14,4 +14,5 @@ func Setup(app *fiber.App){
 	app.Post("/blog/post", controller.CreatePost)
 	app.Get("/blog/getallpost", controller.GetAllPost)
 	app.Get("/blog/getallpost/:id", controller.DetailPost)
+	app.Put("/blog/updatepost/:id", controller.UpdatPost)
 }

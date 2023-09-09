@@ -45,3 +45,13 @@ func GetAllPost(c *fiber.Ctx) error {
 		},
 	})
 }
+
+func DetailPost(c *fiber.Ctx) error {
+	id, _ :=strconv.Atoi(c.Params("id"))
+	var postBlog models.Blog
+	database.DB.Where("id=?", id).Preload("User").First(&postBlog)
+	return c.JSON(fiber.Map{
+		"data":postBlog,
+	})
+
+}

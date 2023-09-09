@@ -13,4 +13,5 @@ func Setup(app *fiber.App){
 	app.Use(middleware.IsAuthenticate)
 	app.Post("/blog/post", controller.CreatePost)
 	app.Get("/blog/getallpost", controller.GetAllPost)
+	app.Get("/blog/getallpost/:id", controller.DetailPost)
 }

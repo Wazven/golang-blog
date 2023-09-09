@@ -16,4 +16,5 @@ func Setup(app *fiber.App){
 	app.Get("/blog/getallpost/:id", controller.DetailPost)
 	app.Put("/blog/updatepost/:id", controller.UpdatPost)
 	app.Get("/blog/uniquepost", controller.UniquePost)
+	app.Delete("/blog/deletepost/:id", controller.DeletePost)
 }

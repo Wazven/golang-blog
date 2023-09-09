@@ -1,6 +1,7 @@
 package controller
 
 import (
+	"errors"
 	"fmt"
 	"math"
 	"strconv"
@@ -9,6 +10,7 @@ import (
 	"github.com/wazven/backendblog/database"
 	"github.com/wazven/backendblog/models"
 	"github.com/wazven/backendblog/util"
+	"gorm.io/gorm"
 )
 
 func CreatePost(c *fiber.Ctx) error {
@@ -78,3 +80,20 @@ func UniquePost(c *fiber.Ctx) error {
 
 	return c.JSON(blog)
 }
+
+func DeletePost(c *fiber.Ctx) error {
+	id, _ :=strconv.Atoi(c.Params("id"))
+	blog:=models.Blog{
+		ID: uint(id),
+	}
+	deleteQuery := database.DB.Delete(&blog)
+	if errors.Is(deleteQuery.Error, gorm.ErrRecordNotFound) {
+		c.Status(400)
+		return c.JSON(fiber.Map{
+			"message":"Ops!, Posting tidak ditemukan",
+		})
+	}
+	return c.JSON(fiber.Map{
+		"message":"Postingan Berhasil Dihapus",
+	})
+}	

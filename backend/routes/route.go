@@ -12,9 +12,11 @@ func Setup(app *fiber.App){
 	//middleware
 	app.Use(middleware.IsAuthenticate)
 	app.Post("/blog/post", controller.CreatePost)
-	app.Get("/blog/getallpost", controller.GetAllPost)
-	app.Get("/blog/getallpost/:id", controller.DetailPost)
-	app.Put("/blog/updatepost/:id", controller.UpdatPost)
+	app.Get("/blog/post", controller.GetAllPost)
+	app.Get("/blog/post/:id", controller.DetailPost)
+	app.Put("/blog/post/:id", controller.UpdatePost)
 	app.Get("/blog/uniquepost", controller.UniquePost)
-	app.Delete("/blog/deletepost/:id", controller.DeletePost)
+	app.Delete("/blog/post/:id", controller.DeletePost)
+	app.Post("blog/imagepost", controller.Upload)
+	app.Static("/blog/uploads", "./uploads")
 }

@@ -58,7 +58,7 @@ func DetailPost(c *fiber.Ctx) error {
 	})
 }
 
-func UpdatPost(c *fiber.Ctx) error {
+func UpdatePost(c *fiber.Ctx) error {
 	id, _ := strconv.Atoi(c.Params("id"))
 	blog := models.Blog{
 		ID: uint(id),

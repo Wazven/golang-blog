@@ -155,6 +155,7 @@ Start the server
                 "phone": "082791074092"
             }
         }
+    ]
 }
 ```
 ## Get Detail Blog

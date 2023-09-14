@@ -7,16 +7,19 @@ import (
 )
 
 func Setup(app *fiber.App){
-	app.Post("/blog/register", controller.Register)
-	app.Post("/blog/login", controller.Login)
+
+	blog := app.Group("/blog")
+
+	blog.Post("/blog/register", controller.Register)
+	blog.Post("/blog/login", controller.Login)
 	//middleware
-	app.Use(middleware.IsAuthenticate)
-	app.Post("/blog/post", controller.CreatePost)
-	app.Get("/blog/post", controller.GetAllPost)
-	app.Get("/blog/post/:id", controller.DetailPost)
-	app.Put("/blog/post/:id", controller.UpdatePost)
-	app.Get("/blog/uniquepost", controller.UniquePost)
-	app.Delete("/blog/post/:id", controller.DeletePost)
-	app.Post("blog/imagepost", controller.Upload)
-	app.Static("/blog/uploads", "./uploads")
+	blog.Use(middleware.IsAuthenticate)
+	blog.Post("/blog/post", controller.CreatePost)
+	blog.Get("/blog/post", controller.GetAllPost)
+	blog.Get("/blog/post/:id", controller.DetailPost)
+	blog.Put("/blog/post/:id", controller.UpdatePost)
+	blog.Get("/blog/uniquepost", controller.UniquePost)
+	blog.Delete("/blog/post/:id", controller.DeletePost)
+	blog.Post("blog/imagepost", controller.Upload)
+	blog.Static("/blog/uploads", "./uploads")
 }
